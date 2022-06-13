@@ -11,16 +11,9 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const db = new sqlite3.Database('./mock.db', sqlite3.OPEN_READWRITE, (err) => {
+const db = new sqlite3.Database('./db.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) return console.error(err.message)
   console.log('connection successfull')
-})
-app.get('/', (req, res) => {
-  db.run('DELETE  from members;', (err) => {
-    if (err) return console.error(err.message)
-    console.log('A new row has been created')
-  })
-  res.send('success')
 })
 
 const insertDBDataMembers = async (data, group_id) => {
